@@ -11,6 +11,7 @@ app.get('/headers', function(req, res) {
     
     console.log(s); 
     console.log(1);  
+    console.log(2);  
     res.send(s);
 });
 
