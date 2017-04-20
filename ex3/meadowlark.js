@@ -1,5 +1,5 @@
 var express = require('express');
-
+var fortune = require('./lib/fortune.js');
 var app = express();
 
 //设置handlebars视图引擎
@@ -9,22 +9,23 @@ app.set('view engine', 'handlebars');
 
 app.set('port', process.env.PORT || 3000);
 
-var fortunes = [
-    "Conquer your fears or they will conquer you.克服你的恐惧，否则他们将征服你",
-    "Rivers need springs.河流需要泉水",
-    "Do not fear what you don't know.不要害怕你不知道的",
-    "You will have a pleasant surprise.你会有一个惊喜",
-    "Whenever possible, keep it simple.只要有可能，保持简单",
-];
+
 app.use(express.static(__dirname + '/public'));
+
+app.use(function(req, res, next) {
+    res.locals.showTests = app.get('env') !== 'production' &&
+        req.query.test === '1';
+    next();
+});
 
 app.get('/', function(req, res) {
     res.render('home');
 });
 app.get('/about', function(req, res) {
-    var randomFortune =
-        fortunes[Math.floor(Math.random() * fortunes.length)];
-    res.render('about', { fortune: randomFortune });
+    res.render('about', { 
+        fortune: fortune.getFortune(),
+        pageTestScript: '/qa/tests-about.js' 
+    });
 });
 
 //404 catch-all 处理器(中间件)
