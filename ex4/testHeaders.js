@@ -9,7 +9,8 @@ app.get('/headers', function(req, res) {
     
     for (var name in req.headers) s += name + ': ' + req.headers[name] + '\n';
     
-    console.log(s);   
+    console.log(s); 
+    console.log(1);  
     res.send(s);
 });
 
