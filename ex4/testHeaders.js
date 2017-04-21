@@ -6,15 +6,9 @@ app.set('port', process.env.PORT || 3000);
 app.get('/headers', function(req, res) {
     res.set('Content-Type', 'text/plain');
     var s = '';
-    
+
     for (var name in req.headers) s += name + ': ' + req.headers[name] + '\n';
-    
-    console.log(s); 
-    console.log(1);  
-    console.log(2);  
-    console.log(2);  
-    console.log(23);  
-    console.log(23);  
+    console.log(s);
     res.send(s);
 });
 
