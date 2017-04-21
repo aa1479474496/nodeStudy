@@ -13,7 +13,9 @@ app.get('/', function(req, res) {
     res.render('home');
 });
 app.get('/about', function(req, res) {
-    res.render('about')
+    res.render('about', { layout: 'test' });
+    // layout: null 不使用固定的模板
+    //layout: 'test' 使用test.handlebars模板
 });
 
 //404 catch-all 处理器(中间件)
